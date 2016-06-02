@@ -64,6 +64,11 @@ public class MyLinearMap<K, V> implements Map<K, V> {
 	 */
 	private Entry findEntry(Object target) {
         // TODO: fill this in
+        for(Entry e: entries){
+            if(equals(e.getKey(), target)){
+                return e;
+            }
+        }
 		return null;
 	}
 
@@ -99,6 +104,10 @@ public class MyLinearMap<K, V> implements Map<K, V> {
 	@Override
 	public V get(Object key) {
         // TODO: fill this in.
+        if(containsKey(key)){
+            Entry e = findEntry(key);
+            return e.getValue();
+        }
 		return null;
 	}
 
@@ -119,6 +128,12 @@ public class MyLinearMap<K, V> implements Map<K, V> {
 	@Override
 	public V put(K key, V value) {
         // TODO: fill this in.
+        if(containsKey(key)){
+            Entry e = findEntry(key);
+            e.setValue(value);
+        }else{
+            entries.add(new Entry(key, value));
+        }
         return null;
 	}
 
@@ -132,6 +147,11 @@ public class MyLinearMap<K, V> implements Map<K, V> {
 	@Override
 	public V remove(Object key) {
         // TODO: fill this in.
+        if(containsKey(key)){
+            Entry e = findEntry(key);
+            entries.remove(e);
+            return e.getValue();
+        }
         return null;
 	}
 
